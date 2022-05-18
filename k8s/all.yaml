@@ -37,7 +37,6 @@ metadata:
   labels:
     id: frontend-svc
 spec:
-  type: NodePort
   ports:
   - name: tcp-rule-frontend
     port: 80
