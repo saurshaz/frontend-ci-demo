@@ -35,7 +35,7 @@ metadata:
   name: frontend-svc
   namespace: frontend
   labels:
-    id: frontend-svc
+    app: frontend-svc
 spec:
   ports:
   - name: tcp-rule-frontend
