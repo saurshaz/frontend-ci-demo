@@ -1,17 +1,20 @@
 apiVersion: v1
-kind: Namespace
+kind: Service
 metadata:
   name: frontend
+spec:
+  ports:
+  - port: 3002
+    name: http
+  type: LoadBalancer
+  selector:
+    app: frontend
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend
-  namespace: frontend
-  labels:
-    app: frontend
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: frontend
@@ -19,29 +22,9 @@ spec:
     metadata:
       labels:
         app: frontend
-    spec:             
+    spec:
       containers:
       - name: frontend
-        image: frontend-app
+        image: skaffold-buildpacks-node
         ports:
-        - containerPort: 3002
-        env:
-          - name: NODE_ENV
-            value: "production"           
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: frontend-svc
-  namespace: frontend
-  labels:
-    app: frontend-svc
-spec:
-  ports:
-  - name: tcp-rule-frontend
-    port: 80
-    protocol: TCP
-    targetPort: 3002
-  type: LoadBalancer
-  selector:
-    app: frontend-svc
+          - containerPort: 3002
