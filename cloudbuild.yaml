@@ -1,7 +1,7 @@
 steps:
-- name: 'gcr.io/k8s-skaffold/pack'
-  entrypoint: 'pack'
-  args: ['build', '--builder=gcr.io/buildpacks/builder', '--publish', 'us.gcr.io/$PROJECT_ID/$_REPO/$_IMAGE:$SHORT_SHA']
+- name: 'gcr.io/cloud-builders/docker'
+  id: 'Build'
+  args: ["build", "-t", "$_IMAGE:$SHORT_SHA", ".", "-f", "$_DOCKERFILE_PATH"]
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: 'bash'
   args:
@@ -48,6 +48,7 @@ substitutions:
   _PROD_CLUSTER: cluster-prod
   _REPO: frontend-app
   _IMAGE: frontend-app-image
+  _DOCKERFILE_PATH: Dockerfile
   _PIPELINE_ID: frontend-app-pipeline
   _PIPELINE_DESC: frontend app pipeline for cloud build generating a release that gets deployed to GKE cluster 
 tags:
