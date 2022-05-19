@@ -20,7 +20,6 @@ WORKDIR /frontend-app
 
 COPY ./package* ./
 COPY ./lerna* ./
-COPY ./docker* ./
 COPY ./packages/cra/package* ./packages/cra/
 
 # Install dependencies
