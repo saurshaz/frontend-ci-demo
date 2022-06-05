@@ -14,7 +14,6 @@ yarn
 yarn dev
 ```
 
-
 ### Workflow
 - Git push takes the code to `github.com`
 - Google `Cloud Build` builds with the new code and creates a `release`
