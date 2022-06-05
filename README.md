@@ -13,3 +13,9 @@ npm run dev
 yarn
 yarn dev
 ```
+
+
+### Workflow
+- Git push takes the code to `github.com`
+- Google `Cloud Build` builds with the new code and creates a `release`
+- Google `Cloud Deploy` deploys the new release using a configured pipeline to the configured target and ups the GKE cluster
