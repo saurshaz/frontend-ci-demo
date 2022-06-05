@@ -10,3 +10,5 @@ build
 npm-debug.log*
 lerna-debug.log*
 *.tgz
+dist/index.html
+dist/assets/index.e85c07da.js

@@ -1,7 +1,15 @@
 steps:
-- name: 'gcr.io/cloud-builders/docker'
+- name: node:15
+  entrypoint: npm
+  args: ['install']
+  timeout: 900s
+- name: node:15
+  entrypoint: npm
+  args: ['run', 'build']
+- name: 'gcr.io/k8s-skaffold/pack'
   id: 'Build'
-  args: ["build", "-t", "$_IMAGE:$SHORT_SHA", ".", "-f", "$_DOCKERFILE_PATH"]
+  entrypoint: 'pack'
+  args: ['dist',  '--buildpack', 'gcr.io/paketo-buildpacks/nginx', '--builder',  'paketobuildpacks/builder:full', '--publish', 'us.gcr.io/$PROJECT_ID/$_REPO/$_IMAGE:$SHORT_SHA']  
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: 'bash'
   args:
@@ -11,7 +19,8 @@ steps:
     --delivery-pipeline=$_PIPELINE_ID
     --region=$_REGION
     --source=./
-    --images=$_REPO=us.gcr.io/$PROJECT_ID/$_REPO/$_IMAGE:$SHORT_SHA
+    --images=frontend=us.gcr.io/$PROJECT_ID/$_REPO/$_IMAGE:$SHORT_SHA
+timeout: 1500s
 ---
 apiVersion: deploy.cloud.google.com/v1
 kind: DeliveryPipeline
@@ -44,8 +53,8 @@ metadata:
 substitutions:
   _GCR_HOSTNAME: us.gcr.io
   _REGION: us-central1
-  _DEV_CLUSTER: cluster-dev-1
-  _PROD_CLUSTER: cluster-prod
+  _DEV_CLUSTER: cluster-ci
+  _PROD_CLUSTER: cluster-ci-prod
   _REPO: frontend-app
   _IMAGE: frontend-app-image
   _DOCKERFILE_PATH: Dockerfile
