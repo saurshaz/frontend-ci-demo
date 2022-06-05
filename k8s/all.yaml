@@ -24,7 +24,7 @@ spec:
         app: demo-dpl
     spec:
       containers:
-      - name: cluster-ci
+      - name: cluster-dev-1
         image: skaffold-buildpacks-node
         ports:
           - containerPort: 3000
