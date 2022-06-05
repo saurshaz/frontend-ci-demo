@@ -4,7 +4,7 @@ metadata:
   name: demo-service
 spec:
   ports:
-  - port: 3002
+  - port: 80
     name: http
   type: LoadBalancer
   selector:
@@ -27,4 +27,4 @@ spec:
       - name: cluster-dev-1
         image: skaffold-buildpacks-node
         ports:
-          - containerPort: 3000
+          - containerPort: 8080
