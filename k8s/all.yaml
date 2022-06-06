@@ -24,7 +24,7 @@ spec:
         app: demo-dpl
     spec:
       containers:
-      - name: nginx-1-cluster
+      - name: autopilot-cluster-1
         image: skaffold-buildpacks-node
         ports:
-          - containerPort: 8080
+          - containerPort: 3000
