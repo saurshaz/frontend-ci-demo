@@ -24,7 +24,7 @@ spec:
         app: demo-dpl
     spec:
       containers:
-      - name: cluster-ci
+      - name: nginx-1-cluster
         image: skaffold-buildpacks-node
         ports:
           - containerPort: 8080
