@@ -9,7 +9,7 @@ steps:
 - name: 'gcr.io/k8s-skaffold/pack'
   id: 'Build'
   entrypoint: 'pack'
-  args: ['build',  '--buildpack', 'gcr.io/paketo-buildpacks/nginx', '--builder',  'paketobuildpacks/builder:full', '--publish', 'us.gcr.io/$PROJECT_ID/$_REPO/$_IMAGE:$SHORT_SHA']  
+  args: ['build',  '--buildpack', 'gcr.io/paketo-buildpacks/nginx', '--builder',  'paketobuildpacks/builder:full', '--publish', 'us.gcr.io/$PROJECT_ID/$REPO_NAME/$_IMAGE:$SHORT_SHA']  
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: 'bash'
   args:
@@ -19,7 +19,7 @@ steps:
     --delivery-pipeline=$_PIPELINE_ID
     --region=$_REGION
     --source=./
-    --images=frontend=us.gcr.io/$PROJECT_ID/$_REPO/$_IMAGE:$SHORT_SHA
+    --images=frontend=us.gcr.io/$PROJECT_ID/$REPO_NAME/$_IMAGE:$SHORT_SHA
 timeout: 1500s
 ---
 apiVersion: deploy.cloud.google.com/v1
@@ -55,7 +55,6 @@ substitutions:
   _REGION: asia-southeast2
   _DEV_CLUSTER:  primary
   _PROD_CLUSTER: autopilot-cluster-1-prod
-  _REPO: frontend-ci-demo
   _IMAGE: frontend-app-image
   _DOCKERFILE_PATH: Dockerfile
   _PIPELINE_ID: primary-frontend-pipeline
