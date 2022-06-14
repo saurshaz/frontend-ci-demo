@@ -58,7 +58,7 @@ substitutions:
   _REPO: frontend-app
   _IMAGE: frontend-app-image
   _DOCKERFILE_PATH: Dockerfile
-  _PIPELINE_ID: frontend-app-pipeline
+  _PIPELINE_ID: primary-frontend-pipeline
   _PIPELINE_DESC: frontend app pipeline for cloud build generating a release that gets deployed to GKE cluster 
 tags:
   - gcp-cloud-build-deploy-gke
