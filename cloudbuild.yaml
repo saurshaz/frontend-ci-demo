@@ -51,14 +51,7 @@ metadata:
     cluster: projects/$PROJECT_ID/locations/$LOCATION/clusters/$_PROD_CLUSTER
 ---
 substitutions:
-  _GCR_HOSTNAME: us.gcr.io
-  _REGION: asia-southeast2
-  _DEV_CLUSTER:  primary
-  _PROD_CLUSTER: autopilot-cluster-1-prod
-  _IMAGE: frontend-app-image
-  _DOCKERFILE_PATH: Dockerfile
-  _PIPELINE_ID: primary-frontend-pipeline
-  _PIPELINE_DESC: frontend app pipeline for cloud build generating a release that gets deployed to GKE cluster 
+  
 tags:
   - gcp-cloud-build-deploy-gke
   - frontend-app
